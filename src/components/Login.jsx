@@ -1,12 +1,12 @@
 import React, { useContext, useState } from 'react'
-import { AuthContext } from '../Context/AuthContext'
+import { AuthContext, useAuth } from '../Context/AuthContext'
 import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
-    const { login } = useContext(AuthContext)
+    const { login } = useAuth()
     const navigate = useNavigate()
 
     const handleUsername = (e) => {
