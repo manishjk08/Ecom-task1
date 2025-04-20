@@ -9,9 +9,6 @@ const Product = () => {
     const { addtocart } = useCart()
     const{data:product,loading,error}=useFetchProducts(`https://fakestoreapi.com/products/${id}`)
 
-    console.log('Product data:', product)
-    console.log("Product ID:", id);
-
     const handleAddToCart = () => {
         addtocart(product)
         toast.success(`${product.title} added to cart`, {

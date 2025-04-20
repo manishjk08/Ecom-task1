@@ -27,10 +27,11 @@ function App() {
         }>
             <Route index element={<Home/>}/>
             <Route path='products' element={<Allproducts/>}/>
+            <Route path='categories/:category' element={<Allproducts/>}/>
             <Route path='contact' element={<Contact/>}/>
             <Route path='login' element={<Login/>}/>
             <Route path ="cart" element={<Cart/>}/>
-            <Route path="/product/:id" element={<Product/>}/>
+            <Route path="/products/:id" element={<Product/>}/>
         </Route>
       )
     );
