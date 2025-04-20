@@ -5,24 +5,37 @@ import Contact from "./components/Contact"
 import { AuthProvider } from "./Context/AuthContext"
 import {Route,createBrowserRouter,createRoutesFromElements,RouterProvider} from 'react-router-dom'
 import Login from "./components/Login"
+import Cart from './components/Cart'
+import { CartProvider } from "./Context/CartContext"
+import { SearchProvider } from "./Context/SearchContext"
+import Product  from "./components/product"
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
     const router = createBrowserRouter(
       createRoutesFromElements(
-        <Route path='/' element={<NavBar/>}>
+        <Route path='/' element={
+          <SearchProvider>
+            <CartProvider>
+              <AuthProvider>
+                <NavBar/>
+                <ToastContainer/>
+              </AuthProvider>
+            </CartProvider>
+          </SearchProvider>
+        }>
             <Route index element={<Home/>}/>
             <Route path='products' element={<Allproducts/>}/>
             <Route path='contact' element={<Contact/>}/>
             <Route path='login' element={<Login/>}/>
+            <Route path ="cart" element={<Cart/>}/>
+            <Route path="/product/:id" element={<Product/>}/>
         </Route>
       )
     );
           
-    return(
-      <AuthProvider>
-        <RouterProvider router={router}></RouterProvider>
-      </AuthProvider>
-    )
+    return <RouterProvider router={router} />
 }
 
 export default App
