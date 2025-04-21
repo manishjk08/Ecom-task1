@@ -107,8 +107,8 @@ const Allproducts = () => {
           onChange={handleDropdown}
         >
           <option value="">All Categories</option>
-          {categories.map(cat => (
-            <option key={cat} value={cat}>{cat}</option>
+          {categories.map(category => (
+            <option key={category} value={category}>{category}</option>
           ))}
         </select>
       </div>
