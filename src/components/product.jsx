@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from "react-router-dom";
-import { useCart } from '../Context/CartContext'
+import { useAuth } from '../Context/AuthContext'
+import useCart from './UseCart'
 import { toast } from 'react-toastify'
 import useFetchProducts from './UseFetchProducts';
 const Product = () => {
     const { id } = useParams()
     const navigate = useNavigate()
+    const { user } = useAuth()
     const { addtocart } = useCart()
     const{data:product,loading,error}=useFetchProducts(`https://fakestoreapi.com/products/${id}`)
 

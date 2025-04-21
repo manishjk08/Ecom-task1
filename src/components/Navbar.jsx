@@ -5,7 +5,7 @@ import cart from '../assets/cart.svg'
 import menu from '../assets/menu.svg'
 import { Outlet ,NavLink, useNavigate } from 'react-router-dom'
 import {useAuth} from '../Context/AuthContext'
-import { useCart } from '../Context/CartContext'
+import useCart from './UseCart'
 import { useSearch } from '../Context/SearchContext'
 
 const Navbar = () => {

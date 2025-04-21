@@ -6,7 +6,6 @@ import { AuthProvider } from "./Context/AuthContext"
 import {Route,createBrowserRouter,createRoutesFromElements,RouterProvider} from 'react-router-dom'
 import Login from "./components/Login"
 import Cart from './components/Cart'
-import { CartProvider } from "./Context/CartContext"
 import { SearchProvider } from "./Context/SearchContext"
 import Product  from "./components/product"
 import { ToastContainer } from 'react-toastify';
@@ -17,12 +16,10 @@ function App() {
       createRoutesFromElements(
         <Route path='/' element={
           <SearchProvider>
-            <CartProvider>
               <AuthProvider>
                 <NavBar/>
                 <ToastContainer/>
               </AuthProvider>
-            </CartProvider>
           </SearchProvider>
         }>
             <Route index element={<Home/>}/>

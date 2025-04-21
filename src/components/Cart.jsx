@@ -1,11 +1,13 @@
 import React, { useMemo } from 'react'
-import { useCart } from '../Context/CartContext'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import useCart from './UseCart'
+
 
 const Cart = () => {
-    const { cart = [], removefromcart, updateQuantity,clearCart } = useCart()
+    const { cart = [], removefromcart, updateQuantity, clearCart } = useCart()
     const navigate = useNavigate()
+    
 
     const totalprice = useMemo(() => {
         return cart.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2)

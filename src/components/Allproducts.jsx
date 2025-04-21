@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { useCart } from '../Context/CartContext'
+import useCart from './UseCart'
 import { useSearch } from '../Context/SearchContext'
 import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
