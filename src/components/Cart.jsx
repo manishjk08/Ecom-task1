@@ -1,9 +1,7 @@
 import React, { useMemo } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import useCart from './UseCart'
-
-
+import { useCart } from '../Context/UseCart'
 const Cart = () => {
     const { cart = [], removefromcart, updateQuantity, clearCart } = useCart()
     const navigate = useNavigate()

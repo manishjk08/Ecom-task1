@@ -10,6 +10,7 @@ import { SearchProvider } from "./Context/SearchContext"
 import Product  from "./components/product"
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { CartProvider } from "./Context/UseCart"
 
 function App() {
     const router = createBrowserRouter(
@@ -17,8 +18,10 @@ function App() {
         <Route path='/' element={
           <SearchProvider>
               <AuthProvider>
-                <NavBar/>
-                <ToastContainer/>
+                <CartProvider>
+                  <NavBar/>
+                  <ToastContainer/>
+                </CartProvider>
               </AuthProvider>
           </SearchProvider>
         }>

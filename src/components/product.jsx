@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from '../Context/AuthContext'
-import useCart from './UseCart'
+import { useCart } from '../Context/UseCart'
 import { toast } from 'react-toastify'
 import useFetchProducts from './UseFetchProducts';
 const Product = () => {
