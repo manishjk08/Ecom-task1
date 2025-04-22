@@ -1,7 +1,7 @@
 import React from 'react'
 import image from '../assets/main_banner_bg.png'
 import {useNavigate} from 'react-router-dom'
-import banner from '../assets/banner.jpg'
+
 const Home = () => {
   const navigate =useNavigate()
   const handleNavigate =()=>{
@@ -22,9 +22,7 @@ const Home = () => {
       </div>
       <div>
         <h1 className='text-3xl text-center my-5'>Our New Products</h1>
-        <div >
-          <img src={banner} alt='banner' />
-        </div>
+       
       </div>
     </div>
   )
