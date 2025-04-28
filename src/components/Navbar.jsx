@@ -4,16 +4,18 @@ import searchicon from '../assets/search.svg'
 import cart from '../assets/cart.svg'
 import menu from '../assets/menu.svg'
 import { Outlet ,NavLink, useNavigate } from 'react-router-dom'
-import {useAuth} from '../Context/AuthContext'
-import { useCart } from '../Context/UseCart'
-import { useSearch } from '../Context/SearchContext'
+import {logout} from '../features/auth/AuthSlice'
+import { searchQuery } from '../features/search/SearchSlice'
+import { useDispatch, useSelector } from 'react-redux'
 
 const Navbar = () => {
     const[open,setOpen]=useState(false)
-    const {user,logout}=useAuth()
-    const { cart: cartItems } = useCart()
-    const { search, setSearch } = useSearch()
+  
+    const cartItems=useSelector(state=>state.cart.items)
+    const dispatch=useDispatch()
+    const query=useSelector(state=>state.search.query)
     const navigate =useNavigate()
+    const {user} =useSelector(state=>state.auth)
     const handleLoginButton=()=>{
         navigate('/Login')
     }
@@ -23,7 +25,7 @@ const Navbar = () => {
     }
 
     const handleSearch = (e) => {
-        setSearch(e.target.value);
+       dispatch(searchQuery(e.target.value));
         if (window.location.pathname !== '/products') {
             navigate('/products');
         }
@@ -44,7 +46,7 @@ const Navbar = () => {
                         className="py-1.5 w-full bg-transparent outline-none placeholder-gray-500" 
                         type="text" 
                         placeholder="Search products" 
-                        value={search}
+                        value={query}
                         onChange={handleSearch}
                     />
                     <img src={searchicon} alt="search_icon" />
@@ -66,7 +68,7 @@ const Navbar = () => {
                         className="py-1.5 w-full bg-transparent outline-none placeholder-gray-500" 
                         type="text" 
                         placeholder="Search products" 
-                        value={search}
+                        value={query}
                         onChange={handleSearch}
                     />
                     <img src={searchicon} alt="search_icon" />
@@ -80,7 +82,7 @@ const Navbar = () => {
                 {user ? (
                     <>
                     <span className='text-gray-800'>Welcome {user.username}</span>
-                    <button onClick={logout} className="cursor-pointer px-6 py-2 mt-2 bg-indigo-600 hover:bg-indigo-700 transition text-white rounded-full text-sm">
+                    <button onClick={()=>dispatch(logout())} className="cursor-pointer px-6 py-2 mt-2 bg-indigo-600 hover:bg-indigo-700 transition text-white rounded-full text-sm">
                         Logout
                     </button>
                     </>

@@ -1,15 +1,17 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { useCart } from '../Context/UseCart'
-import { useSearch } from '../Context/SearchContext'
 import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import useFetchProducts from './UseFetchProducts'
+import { useSelector,useDispatch } from 'react-redux'
+import { addtocart, } from '../features/cart/CartSlice'
 
 const Allproducts = () => {
   const { category } = useParams()
   const navigate = useNavigate()
-  const { search } = useSearch()
-  const { addtocart } = useCart()
+  
+  const dispatch=useDispatch()
+ 
+  const query=useSelector(state=>state.search.query)
 
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 8
@@ -28,13 +30,13 @@ const Allproducts = () => {
   useEffect(() => {
     setSelected(category || '')
     setCurrentPage(1)
-  }, [category, search])
+  }, [category, ])
 
   const filteredProducts = useMemo(() => {
     return products.filter(product =>
-      product.title.toLowerCase().includes(search.toLowerCase())
+      product.title.toLowerCase().includes((query || '').toLowerCase()) 
     )
-  }, [products, search])
+  }, [products, query])
 
   const currentItems = useMemo(() => {
     const last = currentPage * itemsPerPage
@@ -57,7 +59,7 @@ const Allproducts = () => {
   const handlePageChange = (page) => setCurrentPage(page)
 
   const handleAddToCart = (product) => {
-    addtocart(product)
+    dispatch(addtocart(product))
     toast.success(`${product.title} added to cart`, {
       position: 'top-right',
       autoClose: 2000,

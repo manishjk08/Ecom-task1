@@ -2,28 +2,23 @@ import NavBar from "./components/Navbar"
 import Home from "./components/Home"
 import Allproducts from "./components/Allproducts"
 import Contact from "./components/Contact"
-import { AuthProvider } from "./Context/AuthContext"
 import {Route,createBrowserRouter,createRoutesFromElements,RouterProvider} from 'react-router-dom'
 import Login from "./components/Login"
 import Cart from './components/Cart'
-import { SearchProvider } from "./Context/SearchContext"
 import Product  from "./components/product"
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { CartProvider } from "./Context/UseCart"
+
 
 function App() {
     const router = createBrowserRouter(
       createRoutesFromElements(
         <Route path='/' element={
-          <SearchProvider>
-              <AuthProvider>
-                <CartProvider>
+              <>
                   <NavBar/>
                   <ToastContainer/>
-                </CartProvider>
-              </AuthProvider>
-          </SearchProvider>
+              </>
+          
         }>
             <Route index element={<Home/>}/>
             <Route path='products' element={<Allproducts/>}/>

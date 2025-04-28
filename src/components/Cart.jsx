@@ -1,19 +1,20 @@
 import React, { useMemo } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { useCart } from '../Context/UseCart'
+import { useSelector,useDispatch } from 'react-redux'
+import { removefromcart,updatequantity,clearcart } from '../features/cart/CartSlice'
 const Cart = () => {
-    const { cart = [], removefromcart, updateQuantity, clearCart } = useCart()
+    const cart = useSelector(state=>state.cart.items)
     const navigate = useNavigate()
+    const dispatch =useDispatch()
     
-
     const totalprice = useMemo(() => {
         return cart.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2)
     }, [cart])
 
     const handleQuantityChange = (id, newQuantity) => {
         if (newQuantity < 1) return
-        updateQuantity(id, newQuantity)
+        dispatch(updatequantity({id, quantity: newQuantity }))
     }
 
     const handleCheckout = () => {
@@ -59,7 +60,7 @@ const Cart = () => {
                                 </div>
                             </div>
                             <button
-                                onClick={() => removefromcart(item.id)}
+                                onClick={() => dispatch(removefromcart(item.id))}
                                 className="ml-4 text-red-500 hover:text-red-700"
                             >
                                 Remove
@@ -75,7 +76,7 @@ const Cart = () => {
                             Buy
                         </button>
                         <button
-                            onClick={clearCart}
+                            onClick={()=>dispatch(clearcart())}
                             className="mt-4 bg-red-600 text-white px-6 py-2 rounded-full hover:bg-red-700 flex"
                         >
                             Clear Cart

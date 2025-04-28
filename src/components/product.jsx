@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from "react-router-dom";
-import { useAuth } from '../Context/AuthContext'
-import { useCart } from '../Context/UseCart'
+import { addtocart } from '../features/cart/CartSlice';
 import { toast } from 'react-toastify'
 import useFetchProducts from './UseFetchProducts';
+import { useDispatch,useSelector } from 'react-redux';
 const Product = () => {
     const { id } = useParams()
     const navigate = useNavigate()
-    const { user } = useAuth()
-    const { addtocart } = useCart()
+    
+    const dispatch=useDispatch()
+   
     const{data:product,loading,error}=useFetchProducts(`https://fakestoreapi.com/products/${id}`)
 
     const handleAddToCart = () => {
-        addtocart(product)
+        dispatch(addtocart(product))
         toast.success(`${product.title} added to cart`, {
             position: 'top-right',
             autoClose: 2000,
