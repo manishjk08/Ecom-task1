@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { loginRequest, loginSucess, loginFailure } from '../features/auth/AuthSlice'
+import {login } from '../features/auth/AuthSlice'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
@@ -21,13 +21,12 @@ const Login = () => {
     }
 
     const handleLogin = (e) => {
-        dispatch(loginRequest())
         e.preventDefault()
         if (username.trim() && password.trim()) {
-            dispatch(loginSucess({ username }))
+            dispatch(login({ username }))
             navigate('/')
         } else {
-            dispatch(loginFailure('Login failed'))
+            alert('Login error')
         }
     }
 
